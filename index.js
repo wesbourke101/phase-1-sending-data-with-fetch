@@ -1,33 +1,23 @@
-
-function submitData(name, email) {  
-    const nameingObject = {
-        name: name,
-        email: email,
-    }
-    const configurationObject = {
+function submitData( name, email ) {
+    return fetch( 'http://localhost:3000/users', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
+          "Accept": "application/json"
         },
-        body: JSON.stringify(nameingObject),
-      };
-
-  fetch("http://localhost:3000/users", configurationObject)
-  .then((response) => {
-    return response.json();
-  })
-  .then((object) => {
-    let idValue = object.id
-    const postLocation = document.querySelector('#here')
-    postLocation.append(idValue)
-  })
-  .catch((error) => {
-    //alert("Bad things! Ragnarők!");
-    const postLocation = document.querySelector('#here')
-    let errorMess = error.message;
-    console.log(errorMess)
-    postLocation.append(errorMess)
-  });
-}
+        body: JSON.stringify( {
+          name,
+          email
+        } )
+      } )
+      .then( function ( response ) {
+        return response.json()
+      } )
+      .then( function ( object ) {
+        document.body.innerHTML = object[ "id" ]
+      } )
+      .catch( function ( error ) {
+        document.body.innerHTML = error.message
+      } )
+  }
 //submitData("sad " , "dad")
