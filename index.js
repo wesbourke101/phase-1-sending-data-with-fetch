@@ -24,6 +24,7 @@ function submitData(name, email) {
   })
   .catch((error) => {
     //alert("Bad things! Ragnarők!");
+    const postLocation = document.querySelector('#here')
     let errorMess = error.message;
     console.log(errorMess)
     postLocation.append(errorMess)
